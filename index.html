@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/reset.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Quiz</title>
+</head>
+<body>
+    <h1>Quiz Game</h1>
+
+    <main>
+
+        <aside>
+        
+            <button id="highScore">View High Scores</button>
+        
+            <button id="startGame">Start Game</button>
+        
+            <div class="theme-switch-wrapper">
+                <label class="switch">
+                    <!-- <p> Light Mode  -->
+                        <span>
+                            <input type="checkbox"/>
+                        <span class="slider"></span>
+                        </span>
+                        <!-- Dark Mode
+                    </p> -->
+                </label>
+                <em>Enable Dark Mode</em>
+            </div>
+                <!-- <p>Light Mode <button></button>Dark Mode</p> -->
+    
+        </aside>
+    
+        <article id="question-box"> 
+            <p>Time Left: <span class="timer"></span></p>
+        
+            <h2>Question:<span id="question"></span></h2>
+        
+            <ul id="answers">
+               
+                <li id="answer0"></li>
+                
+                <li id="answer1"></li>
+                
+                <li id="answer2"></li>
+                
+                <li id="answer3"></li>
+            
+            </ul>
+
+        </article>
+
+    </main>
+
+    <section>
+
+        <p>Current Score: <span id = "currentScore">0</span></p>
+
+        <p id="messageBox"> Click "Start Game" </p>
+
+    </section>
+
+
+    
+    
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="./assets/script.js"></script>
+
+</html>
