@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,49 +8,37 @@
     <link rel="stylesheet" href="./assets/style.css">
     <title>Quiz</title>
 </head>
+
 <body>
-    <h1>Quiz Game</h1>
+    
+    <h1>JavaScript Quiz Game</h1>
 
     <main>
 
         <aside>
-        
+                <!-- Add high score button  -->
             <button id="highScore">View High Scores</button>
-        
+                <!-- Add start button  -->
             <button id="startGame">Start Game</button>
-        
+                <!-- Add code for Dark Mode switch -->
             <div class="theme-switch-wrapper">
-                <label class="switch">
-                    <!-- <p> Light Mode  -->
-                        <span>
-                            <input type="checkbox"/>
+                <label class="theme-switch" for="checkbox">
+                    <span>
+                        <input type="checkbox" id="checkbox" />
                         <span class="slider"></span>
-                        </span>
-                        <!-- Dark Mode
-                    </p> -->
+                    </span>
                 </label>
                 <em>Enable Dark Mode</em>
             </div>
-                <!-- <p>Light Mode <button></button>Dark Mode</p> -->
-    
         </aside>
-    
-        <article id="question-box"> 
+
+        <article id="question-box">
             <p>Time Left: <span class="time"></span></p>
-        
-            <h2>Question: <p class="questionText"></p></h2>
-        
-            <ul class="answers">
-               
-                <li id="answer0"></li>
-                
-                <li id="answer1"></li>
-                
-                <li id="answer2"></li>
-                
-                <li id="answer3"></li>
-            
-            </ul>
+
+            <h2>Question: <p class="questionText"></p>
+            </h2>
+
+            <ol class="answers"></ol>
 
         </article>
 
@@ -57,15 +46,15 @@
 
     <section>
 
-        <p>Current Score: <span id = "currentScore"></span></p>
+        <p>Current Score: <span class="displayCurrentScore">0</span></p>
 
-        <p class="messageBox"> Click "Start Game" </p>
+        <p class="messageBox"></p>
 
     </section>
 
 
-    
-    
+
+
 </body>
 <script src="./assets/script.js"></script>
 
