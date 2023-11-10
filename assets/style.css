@@ -19,6 +19,7 @@
     color: var(--font-color);
     display: flexbox;
     line-height: 2;
+    margin: 1px;
 }
 
 h1 {
