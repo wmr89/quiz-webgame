@@ -1,15 +1,16 @@
 :root {
   --primary-color: white;
-  --secondary-color: black;
-  --font-color: black;
+  --secondary-color: blue;
+  --font-color: blue;
   --second-font-color: gray;
   --heading-color: blue;
 }
+
 /* Add colors for dark mode */
 [data-theme="dark"] {
   --primary-color: black;
-  --secondary-color: white;
-  --font-color: white;
+  --secondary-color: blue;
+  --font-color: blue;
   --second-font-color: gray;
   --heading-color: red;
 }
@@ -49,7 +50,7 @@ aside {
   align-items: center;
 }
 
-#highScore {
+#viewHighScore {
   margin-top: 15px;
   margin-bottom: 15px;
   padding-left: 15px;
@@ -86,7 +87,7 @@ button {
   color: var(--primary-color);
 }
 
-li {
+.answers li {
   background-color: var(--secondary-color);
   margin-right: 50%;
   margin-top: 1.5%;
@@ -105,6 +106,20 @@ li {
   font-style: italic;
 }
 
+#recordScore {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+#highScoreInput {
+  display: none;
+}
+
+.high-scores {
+  padding-left: 8%;
+  display: none;
+  flex-direction: row;
+}
 
 
 
@@ -158,7 +173,7 @@ li {
 }
 
 input:checked+.slider {
-  background-color: #66bb6a;
+  background-color: var(--secondary-color);
 }
 
 input:checked+.slider:before {

@@ -37,8 +37,6 @@ Code Tutorial for Light mode/Dark Mode Toggle Switch
 
 https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8
 
-https://cssgradient.io/
-
 ## License
 
 

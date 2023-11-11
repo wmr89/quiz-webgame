@@ -10,17 +10,17 @@
 </head>
 
 <body>
-    
+
     <h1>JavaScript Quiz Game</h1>
 
     <main>
 
         <aside>
-                <!-- Add high score button  -->
-            <button id="highScore">View High Scores</button>
-                <!-- Add start button  -->
+            <!-- Add high score button  -->
+            <button id="viewHighScore">View High Scores</button>
+            <!-- Add start button  -->
             <button id="startGame">Start Game</button>
-                <!-- Add code for Dark Mode switch -->
+            <!-- Add code for Dark Mode switch -->
             <div class="theme-switch-wrapper">
                 <label class="theme-switch" for="checkbox">
                     <span>
@@ -49,11 +49,24 @@
         <p>Current Score: <span class="displayCurrentScore">0</span></p>
 
         <p class="messageBox"></p>
+       
+        <form id="highScoreInput">
+            
+            <p id="formDirections">Enter you initials to record your score</p>
+            
+            <input type="text" id="scoreInput" name="Initials">
+
+            <button id="recordScore">Record Score</button>
+
+        </form>
 
     </section>
-
-
-
+    <div>
+        <ol class="high-scores" id="high-scores">High Scores:
+            <li>WR, 10</li>
+            <li>WR, 9</li>
+        </ol>
+    </div>
 
 </body>
 <script src="./assets/script.js"></script>
