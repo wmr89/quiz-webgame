@@ -18,15 +18,12 @@ function startGame() {
 
 function runTimer(event) {
     var timerInterval = setInterval(function () {
-        //while?
-        // document.querySelector("#startGame").disabled = 'true';
+
         if (secondsLeft > 0) {
             secondsLeft--;
             timerEL.textContent = secondsLeft + " Seconds";
-            document.querySelector("#startGame").disabled = 'true';
+            document.querySelector("#startGame").disabled = true;
         };
-
-        //console.log(secondsLeft);
 
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
@@ -43,7 +40,7 @@ function runTimer(event) {
 let questions = [
     {
         question: "Which of the following is not a way of writing a function in JavaScript?",
-        answers: ["Arrow Function", "Function Declaration", "Depressed Function", "Arrow Function"],
+        answers: ["Arrow Function", "Function Declaration", "Depressed Function", "Function Expression"],
         correct: 2
     },
     {
@@ -99,7 +96,7 @@ function displayQuestion() {
 
     let question = questions[currentQuestion];
 
-    console.log(question);
+    //console.log(question);
 
     questionText.textContent = question.question;
     //Why do I need this section
@@ -125,7 +122,6 @@ function checkAnswer(selectedIndex) {
     if (selectedIndex === question.correct) {
         currentScore++;
         displayCurrentScore.textContent = currentScore;
-        console.log(currentScore)
         messageBox.textContent = "Correct!";
     } else {
         secondsLeft -= 5;
@@ -133,9 +129,6 @@ function checkAnswer(selectedIndex) {
     }
 
     currentQuestion++;
-
-    console.log(currentQuestion);
-    console.log(questions.length)
 
     if (currentQuestion < questions.length) {
         displayQuestion();
@@ -148,7 +141,7 @@ function gameOver() {
     secondsLeft = 0;
     let scoreInput = document.getElementById("scoreInput");
     highScoreInput.style.display = "block";
-    checkHighScore(account.store);
+    // checkHighScore(account.store);
 
     //add option to store high score
     //reset game
@@ -156,40 +149,55 @@ function gameOver() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//add view high scores
+// view high scores
 let highScoresList = document.querySelector("#high-scores");
-
-let initials = document.getElementById("#student-names");
-
 let viewHighScore = document.querySelector("#viewHighScore");
 let highScores = document.querySelector(".high-scores")
 
 viewHighScore.addEventListener("click", function () {
-    if(highScores.style.display === "none")  {  
-    highScores.style.display = "inline-block"; 
+   
+    if (highScores.style.display === "none") {
+        highScores.style.display = "inline-block";
     } else {
-        highScores.style.display = "none";  
+        highScores.style.display = "none";
     }
     console.log(highScores.style.display);
 })
 
+//record high scores
+let initialsInput = document.querySelector("#scoreInput");
+let recordScore = document.querySelector("#recordScore");
+let highScoreArray = [];
+recordScore.addEventListener("click", function(event) {
+   event.preventDefault();
+    const userScore={
+        initials: initialsInput.value,
+        score: currentScore
+    }
+    highScoreArray.push(userScore)
+
+    localStorage.setItem("highScoreArray", JSON.stringify(highScoreArray))
+})
+
+function displayHighScore() {
+    let storedHighScores = JSON.parse(localStorage.getItem("highScoreArray")) ||[];
+
+    const highScoresList = document.querySelector("#high-scores");
+
+    //highScoresList.innerHTML = "";
+    console.log(storedHighScores)
+
+
+    storedHighScores.forEach(function (score) {
+        let listItem = document.createElement("li");
+        listItem.textContent = score.initials + " : " +score.score;
+        highScoresList.appendChild(listItem);
+        console.log(listItem);
+    });
+    
+}
+
+displayHighScore()
 
 
 
@@ -230,16 +238,16 @@ viewHighScore.addEventListener("click", function () {
 
 // function saveHighScore(currentScore, highScores) {
 //     const newScore = { currentScore, initials };
-    
+
 //     // 1. Add to list
 //     highScores.push(newScore);
-  
+
 //     // 2. Sort the list
 //     highScores.sort((a, b) => b.score - a.score);
-    
+
 //     // 3. Select new list
 //     highScores.splice(NO_OF_HIGH_SCORES);
-    
+
 //     // 4. Save to local storage
 //     localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
 //   };
@@ -255,7 +263,7 @@ viewHighScore.addEventListener("click", function () {
 // function showHighScores() {
 //     const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
 //     const highScoreList = document.getElementById(HIGH_SCORES);
-    
+
 //     highScoreList.innerHTML = highScores
 //       .map((score) => `<li>${score.score} - ${score.name}`)
 //       .join('');
