@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/reset.css">
     <link rel="stylesheet" href="./assets/style.css">
-    <title>Quiz</title>
+    <title>JavaScript Quiz Game</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
                 <em>Enable Dark Mode</em>
             </div>
         </aside>
-
+        <!-- Box for question and answers to display  -->
         <article id="question-box">
             <p>Time Left: <span class="time"></span></p>
 
@@ -43,17 +43,17 @@
         </article>
 
     </main>
-
+    <!-- Section to display messages, score and record scores form  -->
     <section>
 
         <p>Current Score: <span class="displayCurrentScore">0</span></p>
 
-        <p class="messageBox"></p>
-       
+        <p class="messageBox" id="messageBox"></p>
+
         <form id="highScoreInput">
-            
+
             <p id="formDirections">Enter you initials to record your score</p>
-            
+
             <input type="text" id="scoreInput" name="initials">
 
             <button id="recordScore">Record Score</button>
@@ -61,11 +61,13 @@
         </form>
 
     </section>
-    <div>
-        <ol class="high-scores" id="high-scores">High Scores:</ol>
+    <!-- Display for high scores  -->
+    <div id="scores" class="hide">
+        <h3>High Scores:</h3>
+        <ol class="high-scores" id="high-scores"></ol>
     </div>
-
+    <script src="./assets/toggle.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
-<script src="./assets/script.js"></script>
 
 </html>

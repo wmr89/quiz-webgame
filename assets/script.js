@@ -1,339 +1,222 @@
+//Define global variables
+
+//Define global variables for high score
+let viewHighScore = document.querySelector("#viewHighScore");
+//Define global variable for initials and score submission button
+let recordScore = document.querySelector("#recordScore");
+//Define global variable for array that contains high score data
+let highScoreArray = JSON.parse(localStorage.getItem("highScoreArray")) || [];
+//Define global variable for start button
 let sgButton = document.querySelector("#startGame");
+//Define global variable for the question display
 let questionText = document.querySelector(".questionText");
+//Define global variable for the answer display
 let answerText = document.querySelector(".answers");
+//Define global variable for the message box
 let messageBox = document.querySelector(".messageBox");
-let displayCurrentScore = document.querySelector(".displayCurrentScore");
-let highScoreInput = document.getElementById("highScoreInput");
-
-sgButton.addEventListener("click", startGame);
-
+//Define global variable for timer display
 let timerEL = document.querySelector(".time")
+//Define global variable for time left and set starting time
+let secondsLeft = 60;
+let timerInterval;
+//Define global variable for current score and set score to 0
+let currentScore = 0;
+//Define global variable for current question to index the question array
+let currentQuestion = 0;
 
-let secondsLeft = 61;
-
-function startGame() {
-    runTimer();
-    displayQuestion();
-}
-
-function runTimer(event) {
-    var timerInterval = setInterval(function () {
-
-        if (secondsLeft > 0) {
-            secondsLeft--;
-            timerEL.textContent = secondsLeft + " Seconds";
-            document.querySelector("#startGame").disabled = true;
-        };
-
-        if (secondsLeft === 0) {
-            clearInterval(timerInterval);
-            timerEL.textContent = "Time's up!"
-            messageBox.textContent = "Game Over";
-            questionText.style.display = "none";
-            answerText.style.display = "none";
-            highScoreInput.style.display = "block";
-        };
-
-    }, 1000);
-}
-
+//Create questions in as objects in an array
 let questions = [
     {
         question: "Which of the following is not a way of writing a function in JavaScript?",
         answers: ["Arrow Function", "Function Declaration", "Depressed Function", "Function Expression"],
-        correct: 2
+        correct: "Depressed Function"
     },
     {
         question: "Which of the following is not a primitive data type used in javaScript?",
         answers: ["Arrays", "Number", "Sting", "Boolean"],
-        correct: 0
+        correct: "Arrays"
     },
     {
         question: 'The following is an example of what data type? var = "1234"',
         answers: ["Boolean", "Falsy", "Number", "String"],
-        correct: 3
+        correct: "String"
     },
     {
         question: 'Which of the following is not a type of JavaScript alert?',
         answers: ["Alert", "Prompt", "Confirm", "Warning"],
-        correct: 3
+        correct: "Warning"
     },
     {
         question: 'What function does the "++" operator perform?',
         answers: ["Adds 2", "Adds 1", "Multiplies", "Nothing"],
-        correct: 1
+        correct: "Adds 1"
     },
     {
         question: 'Which of the following is not a type of logical operator?',
         answers: ["&&", "||", "@", "!"],
-        correct: 2
+        correct: "@"
     },
     {
         question: 'What does "null" mean?',
         answers: ["No one really knows, they just pretend to know", "The intentional absence of a value", "Undefined", "False"],
-        correct: 1
+        correct: "The intentional absence of a value"
     },
     {
         question: 'A block of code designed to perform a particular task is called a(n) . . .',
         answers: ["Operator", "Function", "Boolean", "Object"],
-        correct: 1
+        correct: "Function"
     },
     {
         question: 'Who created JavaScript?',
         answers: ["Brendan Eich", "Steve Wozniak", "Bill Gates", "Thomas Edison"],
-        correct: 0
+        correct: "Brendan Eich"
     },
     {
         question: 'What is an array in JavaScript?',
         answers: ["A primitive data type that isn't used much", "How british people pronounce Harry", "A function frequently used in JavaScript", "A type of data that stores multiple values and elements in one variable"],
-        correct: 3
+        correct: "A type of data that stores multiple values and elements in one variable"
     }
 ]
 
-let currentQuestion = 0;
+//Create function to start the game for event listener
+function startGame() {
+    //disable button after clicking
+    document.querySelector("#startGame").disabled = true;
+    //start timer
+    runTimer();
+    //Display question and answers
+    displayQuestion();
+}
 
+function runTimer() {
+    //display start time
+    timerEL.textContent = secondsLeft + " Seconds";
+    //Set timer interval to subtract 1 every interval
+    timerInterval = setInterval(function () {
+        //Display if timer is running
+        if (secondsLeft > 0) {
+            secondsLeft--;
+            timerEL.textContent = secondsLeft + " Seconds";
+        };
+        //End game if timer reaches zero
+        if (secondsLeft === 0) {
+            gameOver();
+        };
+    }, 1000);
+}
+
+//Create function to display questions and answers
 function displayQuestion() {
-
+    //Define and isolate current question in the array of questions
     let question = questions[currentQuestion];
-
-    //console.log(question);
-
+    //Clear question text area
+    questionText.innerHTML = "";
+    //Display current question
     questionText.textContent = question.question;
-    //Why do I need this section
+    //clear answer text area
     answerText.innerHTML = "";
-
-    question.answers.forEach(function (answer, index) {
+    //Create and append li for each answer for current question
+    question.answers.forEach(function (answer) {
         let answerItem = document.createElement("li");
         answerItem.textContent = answer;
-        answerItem.addEventListener("click", function () {
-            checkAnswer(index)
-        });
         answerText.appendChild(answerItem);
+        //check answer when li is clicked
+        answerItem.addEventListener("click", checkAnswer);
     });
-
 };
-
-currentScore = 0;
-
-function checkAnswer(selectedIndex) {
-
+//Create function to check the clicked answer against the correct answer
+function checkAnswer() {
     let question = questions[currentQuestion];
-
-    if (selectedIndex === question.correct) {
+    let displayCurrentScore = document.querySelector(".displayCurrentScore");
+    //if statement for correct answer
+    if (this.textContent === question.correct) {
+        //adds 1 to current score
         currentScore++;
+        //Displays updated score
         displayCurrentScore.textContent = currentScore;
+        //Change color for correct message
+        messageBox.style.color = "rgb(0, 255, 47)";
+        //Message for correct answer
         messageBox.textContent = "Correct!";
+        //else statement for incorrect answer
     } else {
+        //Assign time penalty for incorrect answer
         secondsLeft -= 5;
+        //Change color for wrong answer
+        messageBox.style.color = "rgb(255, 0, 0)";
+        //Message for wrong answer
         messageBox.textContent = "Wrong!";
     }
-
+    //Add 1 to current question to cycle to next question
     currentQuestion++;
-
+    //If statement for if questions have all been asked and game is over
     if (currentQuestion < questions.length) {
         displayQuestion();
     } else {
         gameOver();
     }
 }
-
+//Create function to be called when the game is over
 function gameOver() {
+    clearInterval(timerInterval);
+    //Define variable for initial and high score input
+    let highScoreInput = document.getElementById("highScoreInput");
+    //Set timer to zero
     secondsLeft = 0;
-    let scoreInput = document.getElementById("scoreInput");
+    //Style input form
     highScoreInput.style.display = "block";
-    // checkHighScore(account.store);
-
-    //add option to store high score
-    //reset game
-
+    //Display message on timer
+    timerEL.textContent = "Time's up!";
+    //Set color for game over message
+    messageBox.style.color = "var(--secondary-color)";
+    //Set message for game over
+    messageBox.textContent = "Game Over";
+    //Set question and answer sections to display none and remove question
+    questionText.style.display = "none";
+    answerText.style.display = "none";
 }
-
-
-// view high scores
-let highScoresList = document.querySelector("#high-scores");
-let viewHighScore = document.querySelector("#viewHighScore");
-let highScores = document.querySelector(".high-scores")
-
-viewHighScore.addEventListener("click", function () {
-   
-    if (highScores.style.display === "none") {
-        highScores.style.display = "inline-block";
-    } else {
-        highScores.style.display = "none";
-    }
-    console.log(highScores.style.display);
-})
-
-//record high scores
-let initialsInput = document.querySelector("#scoreInput");
-let recordScore = document.querySelector("#recordScore");
-let highScoreArray = [];
-recordScore.addEventListener("click", function(event) {
-   event.preventDefault();
-    const userScore={
+//Create function for saving the score when the submit button is clicked
+function saveScore(event) {
+    //prevent page from refreshing before saving data
+    event.preventDefault();
+    //Set variable for submitted initials
+    let initialsInput = document.querySelector("#scoreInput");
+    //Create object for the user score
+    const userScore = {
         initials: initialsInput.value,
         score: currentScore
     }
+    //add high score object to high score array
     highScoreArray.push(userScore)
-
+    //Stringify array for local storage
     localStorage.setItem("highScoreArray", JSON.stringify(highScoreArray))
-})
+    //refresh window
+    window.location.reload()
+}
 
+//create function to display high score when event listener is clicked
 function displayHighScore() {
-    let storedHighScores = JSON.parse(localStorage.getItem("highScoreArray")) ||[];
-
+    //Create variable high score div
+    const scoresContainer = document.getElementById('scores')
+    //Toggle class "hide" on score container
+    scoresContainer.classList.toggle('hide')
+    //create variable for high score list
     const highScoresList = document.querySelector("#high-scores");
-
-    //highScoresList.innerHTML = "";
-    console.log(storedHighScores)
-
-
-    storedHighScores.forEach(function (score) {
+    //Clear high score list
+    highScoresList.innerHTML = ''
+    //Sort array from high score to low score
+    highScoreArray.sort((a, b) => b.score - a.score);
+    //Create li for each score in the array
+    highScoreArray.forEach(function (score) {
         let listItem = document.createElement("li");
-        listItem.textContent = score.initials + " : " +score.score;
+        listItem.textContent = score.initials + " : " + score.score;
         highScoresList.appendChild(listItem);
-        console.log(listItem);
     });
-    
+
 }
-
-displayHighScore()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let NO_OF_HIGH_SCORES = 10;
-// let HIGH_SCORES = 'highScores';
-// let highScoreString = localStorage.getItem(HIGH_SCORES);
-// //nullish coalescing operator, returns
-// let highScores = JSON.parse(highScoreString) ?? [];
-
-// let lowestScore = highScores[NO_OF_HIGH_SCORES-1]?.score ?? 0;
-
-// function checkHighScore(currentScore) {
-//     let highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
-//     let lowestScore = highScores[NO_OF_HIGH_SCORES-1]?.score ?? 0;
-
-//     if (currentScore > lowestScore) {
-//         saveHighScore(currentScore, highScores);
-//         showHighScores();
-//     }
-// }
-
-// const newScore = {currentScore, initials };
-
-// function saveHighScore(currentScore, highScores) {
-//     const newScore = { currentScore, initials };
-
-//     // 1. Add to list
-//     highScores.push(newScore);
-
-//     // 2. Sort the list
-//     highScores.sort((a, b) => b.score - a.score);
-
-//     // 3. Select new list
-//     highScores.splice(NO_OF_HIGH_SCORES);
-
-//     // 4. Save to local storage
-//     localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
-//   };
-
-//   highScores.map((score) => `<li>${score.score} — ${score.name}`);
-
-//   const highScoreList = document.getElementById(HIGH_SCORES);
-
-// highScoreList.innerHTML = highScores.map((score) => 
-//   `<li>${score.score} - ${score.name}`
-// );
-
-// function showHighScores() {
-//     const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
-//     const highScoreList = document.getElementById(HIGH_SCORES);
-
-//     highScoreList.innerHTML = highScores
-//       .map((score) => `<li>${score.score} - ${score.name}`)
-//       .join('');
-//   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//add code for dark mode toggle switch
-let toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-
-function switchTheme(e) {
-    if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-        document.documentElement.setAttribute('data-theme', 'root');
-    }
-}
-
-toggleSwitch.addEventListener('change', switchTheme, false);
-
-function switchTheme(e) {
-    if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark'); //add this
-    }
-    else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light'); //add this
-    }
-}
-const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-
-if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-
-    if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Start game when start game button is pushed
+sgButton.addEventListener("click", startGame);
+//Display high scores when "View High Scores" button is pushed
+viewHighScore.addEventListener("click", displayHighScore);
+//Submit score when "Record Score" button is clicked
+recordScore.addEventListener("click", saveScore);
