@@ -2,33 +2,29 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+As a coding boot camp student i want to take a timed quiz on JavaScript fundamentals that stores high scores so that I can gauge my progress compared to my peers.
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+Creating this quiz will reenforce JavScripts basics and use web APIs to access local storage.
 
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
-
-## Installation
-
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
+Visit [the JavaScript Quiz Website](https://wmr89.github.io/quiz-webgame/) to load the webpage.
 
-![alt text](assets/images/screenshot.png)
+![Web page screen shot](./assets/website_screenshot.png)
+
+Dark mode can be enabled by using the "Enable Dark Mode" toggle switch
+
+![Dark mode screenshot](./assets/Dark%20mode%20website_screenshot.png)
+
+Click "Start Game" and the game will display questions and start the timer. Click on an answer and the quiz will display "Correct!" or "Wrong!". If you are correct a point will be added to your score. If you are wrong then 5 seconds will be deducted from your remaining time.
+
+![Game play screenshot](./assets/gameplay_website_screenshot.png)
+
+When the time runs out or the questions are all complete the game will display "Game Over" and provide an input box where you can enter your initials and record your score.
+
+![Game over screenshot](./assets/gameover_website_screenshot.png)
 
 ## Credits
 
@@ -39,25 +35,6 @@ https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34
 
 ## License
 
+See LICENSE in the repo
 
 ---
-
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/nielsenjared/badmath)
-
-Badges aren't necessary, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
-## Features
-
-If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute to it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
