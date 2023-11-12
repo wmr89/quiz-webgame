@@ -3,7 +3,7 @@
   --secondary-color: blue;
   --font-color: blue;
   --second-font-color: gray;
-  --heading-color: blue;
+  --heading-color: rgb(239, 71, 71);
 }
 
 /* Add colors for dark mode */
@@ -16,7 +16,6 @@
 }
 
 * {
-  /* background-color: var(--primary-color); */
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: var(--font-color);
   display: flexbox;
@@ -34,14 +33,12 @@ h1 {
 }
 
 main {
-  /* border: solid 1px var(--secondary-color); */
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
 aside {
-  /* border: solid 1px var(--secondary-color); */
   padding: 20px;
   margin: 10px;
   width: 25%;
@@ -65,20 +62,17 @@ aside {
 }
 
 article {
-  /* border: solid 1px var(--secondary-color); */
   padding: 20px;
   margin: 10px;
   width: 75%;
 }
 
 section {
-  /* border: solid 1px var(--secondary-color); */
   text-align: center;
 }
 
 .answers {
   cursor: pointer;
-
 }
 
 button {
@@ -111,14 +105,23 @@ button {
   padding-left: 20px;
 }
 
+/* Display none used to hide until end of game  */
 #highScoreInput {
   display: none;
 }
 
 .high-scores {
   padding-left: 8%;
+
+}
+
+h3 {
+  padding-left: 8%;
+}
+
+/* display none used to hide high scores until button click  */
+.hide {
   display: none;
-  flex-direction: row;
 }
 
 
@@ -126,9 +129,7 @@ button {
 
 
 
-
-
-
+/* Below is code for dark theme switch  */
 .theme-switch-wrapper {
   display: flex;
   align-items: center;
